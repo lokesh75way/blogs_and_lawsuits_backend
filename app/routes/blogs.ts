@@ -1,32 +1,21 @@
 import express from "express";
-import expressAsyncHandler from "express-async-handler";
-import { createResponse } from "../helper/response";
 import { catchError, validate } from "../middleware/validation";
-import { searchBlogsAndLawsuits } from "../services/blog_lawsuit";
+import passport from "passport";
+import { addBlog, deleteBlog, getBlogs, updateBlog } from "../controllers/Blog";
 
 const router = express.Router();
 
-router.get(
-  "/search",
-  validate("blogs:search"),
-  catchError,
-  expressAsyncHandler(async (req, res, next) => {
-    const { query, skip: skipQP, limit: limitQP } = req.query;
-
-    const skip =
-      typeof skipQP != "undefined" ? parseInt(skipQP as string) : undefined;
-
-    const limit =
-      typeof limitQP != "undefined" ? parseInt(limitQP as string) : undefined;
-
-    const result = await searchBlogsAndLawsuits({
-      query: query as string,
-      skip,
-      limit,
-    });
-
-    res.send(createResponse(result));
-  })
+router.get("/", passport.authenticate("jwt", { session: false }), getBlogs);
+router.post("/", passport.authenticate("jwt", { session: false }), addBlog);
+router.put(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  updateBlog
+);
+router.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  deleteBlog
 );
 
 export default router;

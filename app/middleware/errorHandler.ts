@@ -9,7 +9,8 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
     data: err?.data ?? {},
   };
 
-  return res.status(response.error_code).send(response);
+  res.status(response.error_code).send(response);
+  next();
 };
 
 export default errorHandler;

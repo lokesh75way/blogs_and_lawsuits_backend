@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { createMockCategories } from "./category";
-import { createMockBlogs, createMockLawsuits } from "./blog_lawsuit";
 
 export const initDB = async (): Promise<boolean> => {
   return await new Promise((resolve, reject) => {
@@ -12,10 +11,6 @@ export const initDB = async (): Promise<boolean> => {
     mongoose
       .connect(mongodbUri)
       .then(async () => {
-        // create mock data creation methods after db connection
-        await createMockCategories();
-        await createMockBlogs();
-        await createMockLawsuits();
         console.log("DB Connected!");
         resolve(true);
       })
