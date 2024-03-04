@@ -1,17 +1,12 @@
 import passport from "passport";
 import express from "express";
 import { addFaq, deleteFaq, getFaqs, updateFaq } from "../controllers/Faq";
+import { validate } from "../middleware/validation";
 
 const router = express.Router();
-router.post("/", passport.authenticate("jwt", { session: false }), addFaq);
-router.get("/", passport.authenticate("jwt", { session: false }), getFaqs);
-
-router.delete(
-  "/:id",
-  passport.authenticate("jwt", { session: false }),
-  deleteFaq
-);
-
-router.put("/:id", passport.authenticate("jwt", { session: false }), updateFaq);
+router.post("/", validate("add:faq"), addFaq);
+router.put("/:id", validate("update:faq"), updateFaq);
+router.get("/", getFaqs);
+router.delete("/:id", deleteFaq);
 
 export default router;

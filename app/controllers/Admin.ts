@@ -174,10 +174,10 @@ export const forgetPassword = async (
       return;
     }
 
-    const token = await generatePasswordToken(user);
+    const token = generatePasswordToken(user);
 
     if (token) {
-      const body = await forgetPasswordEmailTemplate(
+      const body = forgetPasswordEmailTemplate(
         token,
         user.first_name ? user.first_name : user.email
       );
@@ -250,39 +250,6 @@ export const resetPassword = async (
     }
 
     return res.send(createResponse({}, `Password changed successfully!`));
-  } catch (error) {
-    next(
-      createHttpError(400, {
-        message: error ?? "An error occurred.",
-        data: { user: null },
-      })
-    );
-    return;
-  }
-};
-
-/**
- * Admin/SubAdmin logged out
- * @param { token } req.heder
- * @param res
- */
-export const logout = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    // @ts-ignore
-    const _id = req.user.id;
-    const options = { new: true };
-
-    const logoutUser = await Admin.findByIdAndUpdate(
-      _id,
-      { token: "" },
-      options
-    );
-
-    return res.send(createResponse({}, `Logout successful!`));
   } catch (error) {
     next(
       createHttpError(400, {

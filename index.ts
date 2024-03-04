@@ -51,13 +51,13 @@ const initApp = async (): Promise<void> => {
   // routes for admin
   router.use("/admin", adminRoutes);
   router.use("/staff", adminAccess, checkPermission, staffRoutes);
-  router.use("/blogs", adminAccess, blogRoutes);
-  router.use("/lawsuit", adminAccess, lawSuitsBlog);
-  router.use("/upload", adminAccess, uploadFile);
-  router.use("/faq", adminAccess, faqRoutes);
+  router.use("/blogs", adminAccess, checkPermission, blogRoutes);
+  router.use("/lawsuit", adminAccess, checkPermission, lawSuitsBlog);
+  router.use("/upload", adminAccess, checkPermission, uploadFile);
+  router.use("/faq", adminAccess, checkPermission, faqRoutes);
 
   //routes for user
-  router.use("/user", userRoutes);
+  router.use("/users", userRoutes);
   // error handler
   app.use(errorHandler);
 

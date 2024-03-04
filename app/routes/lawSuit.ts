@@ -11,18 +11,9 @@ import {
 const router = express.Router();
 
 // router.post("/", validate("staff:add"), catchError, addStaff);
-router.get("/", passport.authenticate("jwt", { session: false }), getLawBlogs);
-router.post("/", passport.authenticate("jwt", { session: false }), addLawBlog);
-router.put(
-  "/:id",
-  passport.authenticate("jwt", { session: false }),
-  updateLawBlog
-);
-router.delete(
-  "/:id",
-
-  passport.authenticate("jwt", { session: false }),
-  deleteLawBlog
-);
+router.get("/", getLawBlogs);
+router.post("/", validate("add:lawsuit"), addLawBlog);
+router.put("/:id", validate("update:lawsuit"), updateLawBlog);
+router.delete("/:id", deleteLawBlog);
 
 export default router;

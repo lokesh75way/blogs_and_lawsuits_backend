@@ -44,3 +44,42 @@ export const getFeaturedBlogs = async (
     return;
   }
 };
+export const likePost = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const id = req.query.id;
+    const likePost = await Blog.findByIdAndUpdate(id, {
+      $inc: { like_count: 1 },
+    });
+    if (likePost)
+      res.send(createResponse(likePost, `Successfully Increased likes`));
+  } catch (error) {
+    next(
+      createHttpError(500, {
+        message: error ?? "An error occurred while liking blogs",
+        data: { user: null },
+      })
+    );
+    return;
+  }
+};
+// export const aboutUs = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   try {
+//    const aboutUs=
+//   } catch (error) {
+//     next(
+//       createHttpError(500, {
+//         message: error ?? "An error occurred while liking blogs",
+//         data: { user: null },
+//       })
+//     );
+//     return;
+//   }
+// };

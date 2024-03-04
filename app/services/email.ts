@@ -32,12 +32,12 @@ export const htmlEmailTemplate = (otp: number): string => `
 
 export const forgetPasswordEmailTemplate = (
   token: string,
-  name: string
+  first_name: string
 ): string => `
 <html>
   <body>
     <h3>Welcome to Only Classactions</h3>
-    <p>Dear ${name},</p>
+    <p>Dear ${first_name},</p>
     <p>Click here to reset your password </p>
     <button> <a href=${process.env.APP_URL}/password-reset/${token}> Click Me </a> </button>
     <

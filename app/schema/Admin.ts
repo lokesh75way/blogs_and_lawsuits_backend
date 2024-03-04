@@ -16,7 +16,6 @@ export interface IAdmin extends BaseSchema {
   is_deleted: boolean;
   password: string;
   isValidPassword: (password: string) => Promise<boolean>;
-  token: string;
 }
 
 const AdminSchema = new Schema<IAdmin>(
@@ -39,10 +38,6 @@ const AdminSchema = new Schema<IAdmin>(
     is_deleted: {
       type: Boolean,
       default: false,
-    },
-    token: {
-      type: String,
-      select: false,
     },
   },
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }

@@ -4,7 +4,6 @@ import {
   adminLogin,
   changePassword,
   forgetPassword,
-  logout,
   resetPassword,
   subadminProfileSetup,
 } from "../controllers/Admin";
@@ -43,11 +42,6 @@ router.put(
   validate("admin:resetpassword"),
   catchError,
   resetPassword
-);
-router.post(
-  "/logout",
-  passport.authenticate("jwt", { session: false }),
-  logout
 );
 
 export default router;

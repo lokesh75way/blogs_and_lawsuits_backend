@@ -1,11 +1,10 @@
 import express from "express";
 import passport from "passport";
-import { getFeaturedBlogs } from "../controllers/Featured";
+import { getFeaturedBlogs, likePost } from "../controllers/User";
 
 const router = express.Router();
-router.get(
-  "/featured-blogs",
-  passport.authenticate("jwt", { session: false }),
-  getFeaturedBlogs
-);
+router.get("/featured-blogs", getFeaturedBlogs);
+router.post("/like-post", likePost);
+// router.post("/about-us", aboutUs);
+
 export default router;

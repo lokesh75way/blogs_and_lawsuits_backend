@@ -121,6 +121,265 @@ export const validate = (validationName: string) => {
         check("name").notEmpty().bail().withMessage("Name is required"),
       ];
     }
+    case "update:blog": {
+      return [
+        check("thumbnail")
+          .notEmpty()
+          .bail()
+          .withMessage("thumbnail is required"),
+        check("url_slug").notEmpty().bail().withMessage("url_slug is required"),
+        check("banner").notEmpty().bail().withMessage("banner is required"),
+        check("caption").notEmpty().bail().withMessage("caption is required"),
+        check("short_description")
+          .notEmpty()
+          .bail()
+          .withMessage("short description is required"),
+        check("description")
+          .notEmpty()
+          .bail()
+          .withMessage("description is required"),
+        check("lawsuit").notEmpty().bail().withMessage("lawsuit is required"),
+        check("like_count")
+          .optional()
+          .isInt()
+          .withMessage("Like count must be an integer"),
+        check("share_count")
+          .optional()
+          .isInt()
+          .withMessage("Share count must be an integer"),
+        check("comment_count")
+          .optional()
+          .isInt()
+          .withMessage("Comment count must be an integer"),
+        check("category").notEmpty().bail().withMessage("category is required"),
+        check("faq.*")
+          .optional()
+          .isMongoId()
+          .withMessage("FAQ IDs must be valid IDs"),
+        check("comments.*")
+          .optional()
+          .isMongoId()
+          .withMessage("Comment IDs must be valid IDs"),
+      ];
+    }
+    case "add:blog": {
+      return [
+        check("thumbnail")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("thumbnail is required"),
+        check("url_slug")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("url_slug is required"),
+        check("banner")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("banner is required"),
+        check("caption")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("caption is required"),
+        check("short_description")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("short description is required"),
+        check("description")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("description is required"),
+        check("lawsuit")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("lawsuit is required"),
+        check("like_count")
+          .optional()
+          .isInt()
+          .withMessage("Like count must be an integer"),
+        check("share_count")
+          .optional()
+          .isInt()
+          .withMessage("Share count must be an integer"),
+        check("comment_count")
+          .optional()
+          .isInt()
+          .withMessage("Comment count must be an integer"),
+        check("category")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("category is required"),
+        check("faq.*")
+          .optional()
+          .isMongoId()
+          .withMessage("FAQ IDs must be valid IDs"),
+        check("comments.*")
+          .optional()
+          .isMongoId()
+          .withMessage("Comment IDs must be valid IDs"),
+      ];
+    }
+    case "add:lawsuit": {
+      return [
+        check("thumbnail")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("thumbnail is required"),
+        check("url_slug")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("url_slug is required"),
+        check("banner")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("banner is required"),
+        check("caption")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("caption is required"),
+        check("timelines.*")
+          .optional()
+          .isMongoId()
+          .withMessage("Timeline IDs must be valid  IDs"),
+        check("qualify_description")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("qualify_description is required"),
+        check("lower_qualify_description")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("lower_qualify_description is required"),
+        check("upper_qualify_description")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("upper_qualify_description is required"),
+        check("category")
+          .optional()
+          .isMongoId()
+          .withMessage("Category ID must be a valid  ID"),
+        check("like_count")
+          .optional()
+          .isInt()
+          .withMessage("Like count must be an integer"),
+        check("share_count")
+          .optional()
+          .isInt()
+          .withMessage("Share count must be an integer"),
+        check("comment_count")
+          .optional()
+          .isInt()
+          .withMessage("Comment count must be an integer"),
+        check("updated_by")
+          .optional()
+          .isMongoId()
+          .withMessage("Updated by ID must be a valid  ID"),
+        check("faq.*")
+          .optional()
+          .isMongoId()
+          .withMessage("FAQ IDs must be valid  IDs"),
+        check("comments.*")
+          .optional()
+          .isMongoId()
+          .withMessage("Comment IDs must be valid  IDs"),
+      ];
+    }
+    case "update:lawsuit": {
+      return [
+        check("thumbnail")
+          .notEmpty()
+          .bail()
+          .withMessage("thumbnail is required"),
+        check("url_slug").notEmpty().bail().withMessage("url_slug is required"),
+        check("banner").notEmpty().bail().withMessage("banner is required"),
+        check("caption").notEmpty().bail().withMessage("caption is required"),
+        check("timelines.*")
+          .optional()
+          .isMongoId()
+          .withMessage("Timeline IDs must be valid  IDs"),
+        check("qualify_description")
+          .notEmpty()
+          .bail()
+          .withMessage("qualify_description is required"),
+        check("lower_qualify_description")
+          .notEmpty()
+          .bail()
+          .withMessage("lower_qualify_description is required"),
+        check("upper_qualify_description")
+          .notEmpty()
+          .bail()
+          .withMessage("upper_qualify_description is required"),
+        check("category")
+          .optional()
+          .isMongoId()
+          .withMessage("Category ID must be a valid  ID"),
+        check("like_count")
+          .optional()
+          .isInt()
+          .withMessage("Like count must be an integer"),
+        check("share_count")
+          .optional()
+          .isInt()
+          .withMessage("Share count must be an integer"),
+        check("comment_count")
+          .optional()
+          .isInt()
+          .withMessage("Comment count must be an integer"),
+        check("updated_by")
+          .optional()
+          .isMongoId()
+          .withMessage("Updated by ID must be a valid  ID"),
+        check("faq.*")
+          .optional()
+          .isMongoId()
+          .withMessage("FAQ IDs must be valid  IDs"),
+        check("comments.*")
+          .optional()
+          .isMongoId()
+          .withMessage("Comment IDs must be valid  IDs"),
+      ];
+    }
+    case "add:faq": {
+      return [
+        check("question")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("question is required"),
+        check("answer")
+          .exists({ values: "falsy" })
+          .notEmpty()
+          .bail()
+          .withMessage("answer is required"),
+        check("updated_by")
+          .optional()
+          .isMongoId()
+          .withMessage("Updated by ID must be a valid  ID"),
+      ];
+    }
+    case "update:faq": {
+      return [
+        check("question").notEmpty().bail().withMessage("question is required"),
+        check("answer").notEmpty().bail().withMessage("answer is required"),
+        check("updated_by")
+          .optional()
+          .isMongoId()
+          .withMessage("Updated by ID must be a valid  ID"),
+      ];
+    }
     default:
       return [];
   }
